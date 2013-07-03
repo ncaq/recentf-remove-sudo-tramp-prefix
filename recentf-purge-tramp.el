@@ -1,2 +1,6 @@
-(add-hook 'kill-emacs-hook '(lambda ()
-			     (shell-command "./a.out")))
+(defun purge ()
+  (shell-command "a.out")
+  (recentf-load-list))
+(defun recentf-purge-tramp-stand-by ()
+  (add-hook 'kill-emacs-hook 'purge))
+(provide 'recentf-purge-tramp)
