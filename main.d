@@ -1,6 +1,7 @@
 import std.regex;
 import std.file;
 import std.path;
+import std.stdio;
 
 void main()
 {
@@ -12,10 +13,12 @@ void main()
 	if(isSymlink(default_recentf))
 	{
 		filename = expandTilde("~/") ~ readLink(default_recentf);
+		writeln(filename," is symlink");
 	}
 	else
 	{
 		filename = default_recentf;
+		writeln(filename," is not symlink");
 	}
 	auto oldfile = readText(filename);
 	
@@ -26,6 +29,6 @@ void main()
 	auto r = regex(`/.+:.+@.+:`,"gm");
 	auto newfile = replace(oldfile,r,"");
 
-	write(expandTilde(filename),newfile);
+	std.file.write(expandTilde(filename),newfile);
 	//重複とかはEmacs側が何とかしてくれるだろ…多分…
 }
