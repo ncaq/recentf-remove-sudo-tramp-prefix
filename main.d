@@ -26,7 +26,7 @@ void main()
 	///を
 	///        "/etc/portage/package.use"
 	///にする,などを想定
-	auto r = regex(`/.+:.+@.+:`,"gm");
+	static auto r = regex(`/.+:.+@.+:`,"gm");
 	auto newfile = replace(oldfile,r,"");
 
 	std.file.write(expandTilde(filename),newfile);
