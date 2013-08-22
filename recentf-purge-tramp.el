@@ -2,7 +2,7 @@
 (require 'recentf-ext)
 (defun purge ()
   (recentf-save-list)
-  (shell-command (expand-file-name "~/.emacs.d/universe.d/recentf-purge-tramp/a.out"))
+  (shell-command (expand-file-name "~/.emacs.d/package.d/recentf-purge-tramp/a.out"))
   (recentf-load-list))
 (defun recentf-purge-tramp-stand-by ()
   (add-hook 'kill-emacs-hook 'purge))
