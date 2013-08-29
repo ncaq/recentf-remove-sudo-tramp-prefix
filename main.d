@@ -5,11 +5,8 @@ import std.stdio;
 
 void main()
 {
-	///チルダ展開
-	///リンク取得
-	///相対パスを絶対パスにするrel2absもう廃止されたそうです
-	immutable default_recentf = expandTilde("~/.recentf");
-	string filename;
+	immutable default_recentf = expandTilde("~/.recentf");	///チルダ展開
+	string filename;	///リンク取得
 	if(isSymlink(default_recentf))
 	{
 		filename = expandTilde("~/") ~ readLink(default_recentf);
@@ -20,15 +17,17 @@ void main()
 		filename = default_recentf;
 		writeln(filename," is not symlink");
 	}
-	auto oldfile = readText(filename);
+	auto oldstring = readText(filename);
 	
-	///        "/sudo:root@gentoo-z9-u3:/etc/portage/package.use"
-	///を
-	///        "/etc/portage/package.use"
-	///にする,などを想定
+	/**
+	   "/sudo:root@gentoo-z9-u3:/etc/portage/package.use"
+	   を
+	   "/etc/portage/package.use"
+	   にする,などを想定
+	*/
 	static auto r = regex(`/.+:.+@.+:`,"gm");
-	auto newfile = replace(oldfile,r,"");
+	auto newstring = replace(oldstring,r,"");
 
-	std.file.write(expandTilde(filename),newfile);
+	std.file.write(filename,newstring);
 	//重複とかはEmacs側が何とかしてくれるだろ…多分…
 }
