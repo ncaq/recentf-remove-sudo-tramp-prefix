@@ -10,12 +10,10 @@ void main()
 	if(isSymlink(default_recentf))
 	{
 		filename = expandTilde("~/") ~ readLink(default_recentf);
-		writeln(filename," is symlink");
 	}
 	else
 	{
 		filename = default_recentf;
-		writeln(filename," is not symlink");
 	}
 	auto oldstring = readText(filename);
 	
