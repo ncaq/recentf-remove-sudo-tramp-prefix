@@ -1,8 +1,18 @@
 recentf-purge-tramp
 ===================
+GPLv3
+.recentfのtramp経由(sudo)のファイルパスを通常の状態に戻す
+例
+/sudo:root@gentoo-z9-u3:/etc/portage/package.use
+↓
+/etc/portage/package.use
 
-.recentfのtramp経由(sudo)のファイルパスを普通のに戻す
+```emacs
+(require 'recentf-purge-tramp)
+```
+で有効にしてください
 
-2台のマシン名の違うGentooで.recentfを共有してたら色々ごちゃごちゃしてきて嫌になった
-
-D言語の練習ついでに.普通はEmacsLispでやるべきなんだろうけれど…
+Dropboxで.recentfを共有するときにでもどうぞ
+sshとかには自分がsudoしかtrampの機能を使ってないので相当してません
+尚,実行Binaryの関係でLinux以外はmain.dをビルドし直さなければ多分動きません
+other Linuxの人はdmdをご利用ください

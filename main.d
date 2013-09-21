@@ -1,7 +1,6 @@
 import std.regex;
 import std.file;
 import std.path;
-import std.stdio;
 
 void main()
 {
@@ -23,7 +22,7 @@ void main()
 	   "/etc/portage/package.use"
 	   にする,などを想定
 	*/
-	static auto r = regex(`/.+:.+@.+:`,"gm");
+	static auto r = regex(`/sudo:root@.+:`,"gm");
 	auto newstring = replace(oldstring,r,"");
 
 	std.file.write(filename,newstring);
