@@ -4,8 +4,7 @@
 
 (defun purge ()
   (recentf-save-list)
-  (shell-command (expand-file-name (concat current-dir "a.out")))
-  (kill-buffer "*Shell Command Output*")
+  (call-process (expand-file-name (concat current-dir "a.out")))
   (recentf-load-list))
 
 (add-hook 'after-init-hook 'purge)
