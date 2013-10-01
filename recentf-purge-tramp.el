@@ -1,5 +1,4 @@
 (require 'recentf)
-(require 'recentf-ext)
 (defvar current-dir (file-name-directory load-file-name))
 
 (defun purge ()
