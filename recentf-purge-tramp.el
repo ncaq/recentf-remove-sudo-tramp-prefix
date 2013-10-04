@@ -2,7 +2,6 @@
 (defvar current-dir (file-name-directory load-file-name))
 
 (defun purge ()
-  (recentf-load-list)
   (recentf-save-list)
   (call-process (expand-file-name (concat current-dir "a.out")))
   (recentf-load-list))
