@@ -1,2 +1,2 @@
 #!/bin/sh -x
-dmd main.d -O -release -w -wi -ofa.out
+dmd main.d -O -release -inline -w -wi -ofa.out
