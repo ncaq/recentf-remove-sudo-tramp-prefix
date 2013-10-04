@@ -18,8 +18,8 @@ void main()
 	   "/etc/portage/package.use"
 	   にする,などを想定
 	*/
-	auto r = ctRegex!(`/sudo:root@.+:`,"gm");//機械語正規表現,ctRegex
-	immutable newstring = replace(oldstring,r,"");//なんでimmutableの正規表現受付ない仕様なんだろう…?
+	static auto r = ctRegex!(`/sudo:root@.+:`,"gm");//機械語正規表現,ctRegex
+	immutable newstring = replace(oldstring,r,"");//なんでimmutableの正規表現は受付ない仕様なんだろう…?
 
 	std.file.write(filename,newstring);
 	//重複とかはEmacs側が何とかしてくれるだろ…多分…
