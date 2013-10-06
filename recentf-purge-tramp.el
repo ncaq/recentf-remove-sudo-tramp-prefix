@@ -3,7 +3,7 @@
 
 (defun purge ()
   (recentf-save-list)
-  (call-process (expand-file-name (concat current-dir "a.out")))
+  (call-process (expand-file-name (concat current-dir "a.out")) recentf-save-file)
   (recentf-load-list))
 
 (add-hook 'after-init-hook 'purge)

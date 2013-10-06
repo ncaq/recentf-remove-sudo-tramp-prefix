@@ -2,16 +2,35 @@ import std.regex;
 import std.file;
 import std.path;
 
-void main()
+immutable(string) recentfPath(in string[] path)
 {
-	immutable default_recentf = expandTilde("~/.recentf");	///チルダ展開
+	switch(path.length)
+	{
+	case 1:
+		return expandTilde("~/.recentf");
+	case 2:
+		break;
+	default:
+		throw new Exception("arg error." "\n" "arg is none and 1 only");
+	}
+	
+	immutable tpath = expandTilde(path[1]);
+	if(isSymlink(tpath))
+	{
+		return expandTilde("~/") ~ readLink(tpath); //todo ちゃんとディレクトリを読む
+	}
+	else
+	{
+		//return tpath;
+		throw new Exception("debug");
+	}
+}
 
-	//immutableにしたかったため一行に詰め込むことに.
-	//Symbolic-Linkの場合,本当のファイルを追うようになっています
-	immutable filename = (isSymlink(default_recentf)) ? (expandTilde("~/") ~ readLink(default_recentf)) : default_recentf;
+void main(immutable string[] arg)
+{
+	immutable filename = recentfPath(arg);
 
 	immutable oldstring = readText(filename);
-	
 	/**
 	   "/sudo:root@gentoo-z9-u3:/etc/portage/package.use"
 	   を
