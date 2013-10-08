@@ -21,8 +21,7 @@ immutable(string) recentfPath(in string[] path)
 	}
 	else
 	{
-		//return tpath;
-		throw new Exception("debug");
+		return tpath;
 	}
 }
 
