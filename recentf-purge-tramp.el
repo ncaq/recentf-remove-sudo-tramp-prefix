@@ -7,6 +7,5 @@
   (recentf-load-list))
 
 (add-hook 'after-init-hook 'purge)
-(add-hook 'kill-emacs-hook 'purge)
 
 (provide 'recentf-purge-tramp)
