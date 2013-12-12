@@ -1,10 +1,10 @@
 (require 'recentf)
-(defvar current-dir (file-name-directory load-file-name))
+
+(defun delete-sudo-tramp (source)
+  (replace-regexp-in-string "^/sudo:root@.+:" "" source))
 
 (defun purge ()
-  (recentf-save-list)
-  (call-process (expand-file-name (concat current-dir "a.out")) nil nil nil recentf-save-file)
-  (recentf-load-list))
+  (setq recentf-list (mapcar 'delete-sudo-tramp recentf-list)))
 
 (add-hook 'after-init-hook 'purge)
 
