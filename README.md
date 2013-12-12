@@ -12,7 +12,5 @@ GPLv3
 ```
 で有効にしてください
 
-Dropboxで.recentfを共有するときにでもどうぞ
-sshとかには自分がsudoしかtrampの機能を使ってないので相当してません
-尚,実行Binaryの関係でLinux以外はmain.dをビルドし直さなければ多分動きません
-other Linuxの人はdmdをご利用ください
+Dropboxで.recentfを共有する時にどうぞ
+自分がsudoしかtrampの機能を使ってないのでsshとかには対応してません
