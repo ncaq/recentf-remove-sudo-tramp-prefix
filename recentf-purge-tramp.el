@@ -1,3 +1,4 @@
+;; -*- lexical-binding: t -*-
 (require 'recentf)
 
 (defun delete-sudo-tramp (source)
