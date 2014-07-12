@@ -15,3 +15,6 @@ GPLv3
 Dropboxで.recentfを共有する時にどうぞ
 sshとかは残してます
 名前変えたほうが良い気がしてきた
+
+Copyright 2014 ncaq
+GPLv3
