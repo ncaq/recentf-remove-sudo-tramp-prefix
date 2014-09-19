@@ -7,6 +7,8 @@
 (defun purge ()
   (setq recentf-list (mapcar 'delete-sudo-tramp recentf-list)))
 
-(add-hook 'after-init-hook 'purge)
+(if recentf-mode
+    (purge)
+  (add-hook 'recentf-load-hook 'purge))
 
 (provide 'recentf-purge-tramp)
