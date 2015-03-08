@@ -1,6 +1,5 @@
 ;; -*- lexical-binding: t -*-
 
-(require 'eieio)
 (require 'recentf)
 
 (defun remove-prefix (source)
