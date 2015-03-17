@@ -13,11 +13,8 @@
   )
 
 (defun remove-from-recentf-list ()
-  (setq recentf-list (recentf-list-nothing-sudo))
-  (recentf-cleanup))
+  (setq recentf-list (recentf-list-nothing-sudo)))
 
-(if recentf-mode
-    (remove-from-recentf-list)
-  (add-hook 'recentf-load-hook 'purge))
+(advice-add 'recentf-cleanup :before 'remove-from-recentf-list)
 
 (provide 'recentf-remove-sudo-tramp-prefix)
