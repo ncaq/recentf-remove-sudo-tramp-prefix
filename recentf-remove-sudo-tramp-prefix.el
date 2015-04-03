@@ -1,29 +1,19 @@
 ;; -*- lexical-binding: t -*-
 
 (require 'recentf)
+(require 'tramp)
 
-(defun remove-prefix (source)
-  (replace-regexp-in-string "^/sudo:root@.+:" "" source))
+(defun remove-sudo (x)
+  (if (tramp-tramp-file-p x)
+      (let ((tx (tramp-dissect-file-name x)))
+        (if (tramp-local-host-p tx)
+            (tramp-file-name-localname tx)
+          x))
+    x))
 
-(defun uniq (xs)
-  "omit repeated lines only adjacent"
-  (reduce (lambda (x a)
-            (if (string-equal x (car a))
-                a
-              (cons x a)))
-          xs
-          :initial-value '()
-          :from-end t))
+(defun delete-sudo-from-recentf-list ()
+  (setq recentf-list (mapcar 'remove-sudo recentf-list)))
 
-(defun recentf-list-nothing-sudo ()
-  (uniq (mapcar 'remove-prefix recentf-list)))
-
-(with-eval-after-load 'helm-files
-  (setf (cdr (assoc 'candidates helm-source-recentf)) 'recentf-list-nothing-sudo))
-
-(defun remove-from-recentf-list ()
-  (setq recentf-list (recentf-list-nothing-sudo)))
-
-(advice-add 'recentf-cleanup :before 'remove-from-recentf-list)
+(advice-add 'recentf-cleanup :before 'delete-sudo-from-recentf-list)
 
 (provide 'recentf-remove-sudo-tramp-prefix)
