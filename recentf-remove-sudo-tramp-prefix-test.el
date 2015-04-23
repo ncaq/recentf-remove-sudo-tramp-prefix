@@ -2,50 +2,38 @@
 
 (require 'recentf-remove-sudo-tramp-prefix)
 
-(ert-deftest test:user ()
+(ert-deftest remove-sudo:user ()
   (should (equal
            (remove-sudo "~/.gitconfig")
            "~/.gitconfig"
            )))
 
-(ert-deftest test:scp ()
+(ert-deftest remove-sudo:scp ()
   (should (equal
            (remove-sudo "/scp:root@sonoda:/etc/systemd/system.conf")
            "/scp:root@sonoda:/etc/systemd/system.conf"
            )))
 
-(ert-deftest test:sudo ()
+(ert-deftest remove-sudo:sudo ()
   (should (equal
            (remove-sudo "/sudo:root@akaza.localhost.ncaq.net:/usr/share/emacs/24.5/lisp/net/tramp.el")
            "/usr/share/emacs/24.5/lisp/net/tramp.el"
            )))
 
-(ert-deftest test:tramp-dissect-file-name ()
-  (should (equal
-           (tramp-dissect-file-name "/sudo:root@akaza:/usr/share/emacs/24.5/lisp/net/tramp.el")
-           ["sudo" "root" "akaza" "/usr/share/emacs/24.5/lisp/net/tramp.el" nil]
-           )))
-
-(ert-deftest test:tramp-local-host-p ()
-  (should-not (tramp-local-host-p ["sudo" "root" "akaza" "/usr/share/emacs/24.5/lisp/net/tramp.el" nil])))
-
-(ert-deftest test:sudo-short ()
+(ert-deftest remove-sudo:sudo-short ()
   (should-not (equal
                (remove-sudo "/sudo:root@akaza:/usr/share/emacs/24.5/lisp/net/tramp.el")
                "/usr/share/emacs/24.5/lisp/net/tramp.el"
                )))
 
-(ert-deftest test:sudo-properties ()
+(ert-deftest remove-sudo:sudo-properties ()
   (should (equal
            (remove-sudo #("/sudo:root@akaza.localhost.ncaq.net:/usr/share/emacs/24.5/lisp/net/tramp.el" 6 10 (tramp-default t)))
            "/usr/share/emacs/24.5/lisp/net/tramp.el"
            )))
 
-(ert-deftest test:recentf-list ()
+(ert-deftest remove-sudo:recentf-list ()
   (should (mapc 'remove-sudo recentf-list)))
-
-(ert-deftest test:recentf-list-all-clear ()
-  (should (-none-p 'tramp-local-host-p (mapc 'remove-sudo recentf-list))))
 
 (ert-run-tests-interactively t)
 
