@@ -6,7 +6,7 @@
 (defun remove-sudo (x)
   (if (tramp-tramp-file-p x)
       (let ((tx (tramp-dissect-file-name x)))
-        (if (tramp-local-host-p tx)
+        (if (string-equal "sudo" (tramp-file-name-method tx))
             (tramp-file-name-localname tx)
           x))
     x))
