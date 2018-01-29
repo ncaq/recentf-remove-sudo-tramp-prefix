@@ -27,12 +27,24 @@
           x))
     x))
 
-;;;###autoload
 (defun recentf-remove-sudo-tramp-prefix-delete-sudo-from-recentf-list ()
   "Do `mapcar' `recentf-sudo' to `recentf-list'."
   (setq recentf-list (mapcar 'recentf-remove-sudo-tramp-prefix-remove-sudo recentf-list)))
 
 (advice-add 'recentf-cleanup :before 'recentf-remove-sudo-tramp-prefix-delete-sudo-from-recentf-list)
+
+;;;###autoload
+(define-minor-mode
+  recentf-remove-sudo-tramp-prefix-mode
+  "Normalise recentf history"
+  :init-value 0
+  :lighter " RRSTP"
+  (if recentf-remove-sudo-tramp-prefix-mode
+      (advice-add 'recentf-cleanup :before
+                  'recentf-remove-sudo-tramp-prefix-delete-sudo-from-recentf-list)
+    (advice-remove 'recentf-cleanup
+                   'recentf-remove-sudo-tramp-prefix-delete-sudo-from-recentf-list)
+    ))
 
 (provide 'recentf-remove-sudo-tramp-prefix)
 
