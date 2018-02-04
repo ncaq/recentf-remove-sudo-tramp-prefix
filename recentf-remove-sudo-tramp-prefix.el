@@ -39,6 +39,7 @@
   "Normalise recentf history"
   :init-value 0
   :lighter " RRSTP"
+  :global t
   (if recentf-remove-sudo-tramp-prefix-mode
       (advice-add 'recentf-cleanup :before
                   'recentf-remove-sudo-tramp-prefix-delete-sudo-from-recentf-list)
