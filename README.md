@@ -1,3 +1,5 @@
+[![MELPA](https://melpa.org/packages/recentf-remove-sudo-tramp-prefix-badge.svg)](https://melpa.org/#/recentf-remove-sudo-tramp-prefix)
+
 # recentf-remove-sudo-tramp-prefix
 
 ```txt
