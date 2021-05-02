@@ -44,8 +44,7 @@
       (advice-add 'recentf-cleanup :before
                   'recentf-remove-sudo-tramp-prefix-delete-sudo-from-recentf-list)
     (advice-remove 'recentf-cleanup
-                   'recentf-remove-sudo-tramp-prefix-delete-sudo-from-recentf-list)
-    ))
+                   'recentf-remove-sudo-tramp-prefix-delete-sudo-from-recentf-list)))
 
 (provide 'recentf-remove-sudo-tramp-prefix)
 
