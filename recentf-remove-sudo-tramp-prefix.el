@@ -16,15 +16,11 @@
 ;;; Code:
 
 (require 'recentf)
-(require 'tramp)
 
 (defun recentf-remove-sudo-tramp-prefix-remove-sudo (x)
   "Remove sudo from path.  Argument X is path."
-  (if (tramp-tramp-file-p x)
-      (let ((tx (tramp-dissect-file-name x)))
-        (if (string-equal "sudo" (tramp-file-name-method tx))
-            (tramp-file-name-localname tx)
-          x))
+  (if (string-equal "sudo" (file-remote-p x 'method))
+      (file-remote-p x 'localname)
     x))
 
 (defun recentf-remove-sudo-tramp-prefix-delete-sudo-from-recentf-list ()
