@@ -36,6 +36,13 @@
            "/usr/share/emacs/24.5/lisp/net/tramp.el"
            )))
 
+;; sshを挟んだsudoでsshを残せるか?
+(ert-deftest recentf-remove-sudo-tramp-prefix-remove-sudo:ssh ()
+  (should (equal
+           (recentf-remove-sudo-tramp-prefix-remove-sudo
+            "/ssh:ncaq.net|sudo:root@ncaq.net:/etc/resolv.conf")
+           "/ssh:ncaq.net:/etc/resolv.conf")))
+
 (ert-deftest recentf-remove-sudo-tramp-prefix-remove-sudo:recentf-list ()
   (should (mapc 'recentf-remove-sudo-tramp-prefix-remove-sudo recentf-list)))
 
