@@ -39,7 +39,7 @@
 ;;;###autoload
 (define-minor-mode
   recentf-remove-sudo-tramp-prefix-mode
-  "Normalise recentf history"
+  "Normalise recentf history."
   :init-value 0
   :lighter " RRSTP"
   :global t
