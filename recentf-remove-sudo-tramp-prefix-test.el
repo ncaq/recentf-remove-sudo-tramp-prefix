@@ -21,13 +21,6 @@
            "/usr/share/emacs/24.5/lisp/net/tramp.el"
            )))
 
-(ert-deftest recentf-remove-sudo-tramp-prefix-remove-sudo:sudo-short ()
-  (should-not (equal
-               (recentf-remove-sudo-tramp-prefix-remove-sudo
-                "/sudo:root@akaza:/usr/share/emacs/24.5/lisp/net/tramp.el")
-               "/usr/share/emacs/24.5/lisp/net/tramp.el"
-               )))
-
 (ert-deftest recentf-remove-sudo-tramp-prefix-remove-sudo:sudo-properties ()
   (should (equal
            (recentf-remove-sudo-tramp-prefix-remove-sudo
