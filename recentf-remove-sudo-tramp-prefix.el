@@ -19,8 +19,15 @@
 
 (defun recentf-remove-sudo-tramp-prefix-remove-sudo (x)
   "Remove sudo from path.  Argument X is path."
+  ;; 対象外のものは処理しない。
   (if (string-equal "sudo" (file-remote-p x 'method))
-      (file-remote-p x 'localname)
+      ;; sshを挟むsudoでsshを消してしまわないように対応。
+      ;; 本当はパースしてhopの内容を調べたほうが良いと思うのでかなり雑な対応だが、
+      ;; 認識に失敗したとしてもファイルが壊れたりするわけではないので許容している。
+      (let ((hop (file-remote-p x 'hop)))
+        (if (string-prefix-p "ssh" hop)
+            (concat "/" (substring hop 0 -1) ":" (file-remote-p x 'localname))
+          (file-remote-p x 'localname)))
     x))
 
 (defun recentf-remove-sudo-tramp-prefix-delete-sudo-from-recentf-list ()
@@ -32,7 +39,7 @@
 ;;;###autoload
 (define-minor-mode
   recentf-remove-sudo-tramp-prefix-mode
-  "Normalise recentf history"
+  "Normalise recentf history."
   :init-value 0
   :lighter " RRSTP"
   :global t
